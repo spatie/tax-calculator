@@ -1,6 +1,6 @@
 {
     "name": "spatie/tax-calculator",
-    "description": ":package_description",
+    "description": "A set of interfaces and methods to clean up your application's tax calculations",
     "keywords": [
         "spatie",
         "tax-calculator"
@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php" : "^7.0",
+        "php" : "^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "5.*"
