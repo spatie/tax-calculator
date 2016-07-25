@@ -2,6 +2,7 @@
 
 namespace Spatie\TaxCalculator\Test;
 
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Spatie\TaxCalculator\HasTax;
 use Spatie\TaxCalculator\HasTaxWithRate;
@@ -46,5 +47,14 @@ class TaxCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(30.00, $calculation->basePrice());
         $this->assertEquals(3.30, $calculation->taxPrice());
         $this->assertEquals(33.30, $calculation->taxedPrice());
+    }
+
+    /** @test */
+    function it_only_accepts_arrays_and_traversables_for_collection_calculations()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        TaxCalculation::fromCollection('foo');
+        TaxCalculation::fromCollection('foo');
     }
 }

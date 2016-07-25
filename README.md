@@ -1,4 +1,4 @@
-# Very short description of the package
+# A set of interfaces and methods to clean up your application's tax calculations
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/tax-calculator.svg?style=flat-square)](https://packagist.org/packages/spatie/tax-calculator)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -10,13 +10,13 @@
 ```php
 use Spatie\TaxCalculator\TaxCalculation;
 
-$items = Cart::getItems(); // Should return an array of items that implement `HasTax`
+$items = $myCart->getItems(); // Should return an array of items that implement `HasTax`
 
 TaxCalculation::fromCollection($items)->basePrice(); // 10.00
 TaxCalculation::fromCollection($items)->taxPrice(); // 2.10
 TaxCalculation::fromCollection($items)->taxedPrice(); // 12.10
 
-$delivery = TaxCalculation::fromTaxed(7.50, 0.21);
+$delivery = TaxCalculation::fromTaxedPrice(7.50, 0.21);
 
 TaxCalculation::fromCollection($items)->add($delivery)->taxedPrice(); // 19.60
 ```
@@ -24,13 +24,6 @@ TaxCalculation::fromCollection($items)->add($delivery)->taxedPrice(); // 19.60
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## Installation
-
-**Note:** Remove this paragraph if you are building a public package  
-This package is custom built for [Spatie](https://spatie.be) projects and is therefore not registered on packagist. In order to install it via composer you must specify this extra repository in `composer.json`:
-
-```json
-"repositories": [ { "type": "composer", "url": "https://satis.spatie.be/" } ]
-```
 
 You can install the package via composer:
 
