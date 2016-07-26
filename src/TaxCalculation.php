@@ -7,12 +7,17 @@ use Spatie\TaxCalculator\Results\ItemCalculation;
 
 class TaxCalculation
 {
-    public static function fromBasePrice(float $basePrice, float $taxRate): HasTax
+    public static function create(): HasTax
+    {
+        return new CollectionCalculation();
+    }
+
+    public static function fromBasePrice(float $basePrice, float $taxRate): HasTaxWithRate
     {
         return new ItemCalculation($basePrice, $taxRate);
     }
 
-    public static function fromTaxedPrice(float $taxedPrice, float $taxRate): HasTax
+    public static function fromTaxedPrice(float $taxedPrice, float $taxRate): HasTaxWithRate
     {
         return new ItemCalculation($taxedPrice / (1 + $taxRate), $taxRate);
     }

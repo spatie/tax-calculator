@@ -55,6 +55,16 @@ class TaxCalculationTest extends PHPUnit_Framework_TestCase
         $this->expectException(InvalidArgumentException::class);
 
         TaxCalculation::fromCollection('foo');
-        TaxCalculation::fromCollection('foo');
+    }
+
+    /** @test */
+    function it_can_create_an_empty_calculation()
+    {
+        $calculation = TaxCalculation::create();
+
+        $this->assertInstanceOf(HasTax::class, $calculation);
+        $this->assertEquals(0.00, $calculation->basePrice());
+        $this->assertEquals(0.00, $calculation->taxPrice());
+        $this->assertEquals(0.00, $calculation->taxedPrice());
     }
 }
