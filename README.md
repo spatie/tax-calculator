@@ -7,6 +7,8 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/tax-calculator.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/tax-calculator)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/tax-calculator.svg?style=flat-square)](https://packagist.org/packages/spatie/tax-calculator)
 
+A set of interfaces and methods to clean up your application's tax calculations. The `TaxCalculation` class allows you to do calculations with plain numbers and objects that implement the `HasTax` interface on the fly.
+
 ```php
 use Spatie\TaxCalculator\TaxCalculation;
 
@@ -33,10 +35,31 @@ composer require spatie/tax-calculator
 
 ## Usage
 
-``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+### Interfaces
+
+#### `Spatie\TaxCalculator\HasTax`
+
+```php
+public function basePrice(): float;
+public function taxedPrice(): float;
+public function taxPrice(): float;
 ```
+
+- `basePrice`: The item's price excluding taxes
+- `taxedPrice`: The item's price including taxes
+- `taxPrice`: The item's tax amount (`= taxedPrice() - basePrice()`)
+
+#### `Spatie\TaxCalculator\HasTaxWithRate`
+
+```php
+public function taxRate(): float;
+```
+
+`HasTaxWithRate` extends `HasTax`, and also has a `taxRate` method. This is useful for items that have a fixed tax rate, but can't be used on collections that contain items with various rates.
+
+### Traits
+
+### `Spatie\TaxCalculator\Traits\HasTaxWithRate`
 
 ## Changelog
 
