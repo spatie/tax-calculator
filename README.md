@@ -45,6 +45,8 @@ composer require spatie/tax-calculator
 
 ### Interfaces
 
+The interfaces are provided so you can keep working with your domain objects instead of having to pass around floats everywhere. However, they're not strictly necessary to do calculations.
+
 #### `Spatie\TaxCalculator\HasTax`
 
 ```php
@@ -68,6 +70,12 @@ public function taxRate(): float;
 ### Traits
 
 ### `Spatie\TaxCalculator\Traits\HasTaxWithRate`
+
+The `HasTaxWithRate` trait provides default implementations of `taxPrice` and `taxedPrice`, since they can be deducted by a simple multiplication of `basePrice` and `taxRate`.
+
+### Calculations
+
+...
 
 ## Changelog
 
