@@ -14,9 +14,9 @@ class CollectionCalculation implements HasTax
         $this->items = $items;
     }
 
-    public function add(HasTax $item): HasTax
+    public function add(HasTax $item, int $amount = 1): HasTax
     {
-        $items = array_merge($this->items, [$item]);
+        $items = array_merge($this->items, array_fill(0, $amount, $item));
 
         return new static(...$items);
     }
