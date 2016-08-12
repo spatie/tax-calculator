@@ -30,4 +30,24 @@ class ItemCalculation implements HasTaxWithRate
     {
         return $this->taxRate;
     }
+
+    public function multiply(float $factor): self
+    {
+        return new static($this->basePrice * $factor, $this->taxRate);
+    }
+
+    public function divide(float $dividor): self
+    {
+        return new static($this->basePrice / $dividor, $this->taxRate);
+    }
+
+    public function add(float $amount): self
+    {
+        return new static($this->basePrice + $amount, $this->taxRate);
+    }
+
+    public function subtract(float $amount): self
+    {
+        return new static($this->basePrice - $amount, $this->taxRate);
+    }
 }
