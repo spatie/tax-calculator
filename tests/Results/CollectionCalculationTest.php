@@ -45,7 +45,7 @@ class CollectionCalculationTest extends PHPUnit_Framework_TestCase
     function items_can_be_added_to_an_existing_instance()
     {
         $taxedItemCollection = new CollectionCalculation(new ItemCalculation(10.00, 0.21));
-        $taxedItemCollection = $taxedItemCollection->add(new ItemCalculation(20.00, 0.06));
+        $taxedItemCollection = $taxedItemCollection->addItem(new ItemCalculation(20.00, 0.06));
 
         $this->assertEquals(33.30, $taxedItemCollection->taxedPrice());
     }
@@ -54,7 +54,7 @@ class CollectionCalculationTest extends PHPUnit_Framework_TestCase
     function items_can_be_added_to_an_existing_instance_with_an_amount()
     {
         $taxedItemCollection = new CollectionCalculation(new ItemCalculation(10.00, 0.21));
-        $taxedItemCollection = $taxedItemCollection->add(new ItemCalculation(20.00, 0.06), 2);
+        $taxedItemCollection = $taxedItemCollection->addItem(new ItemCalculation(20.00, 0.06), 2);
 
         $this->assertEquals(54.5, $taxedItemCollection->taxedPrice());
     }

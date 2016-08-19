@@ -12,17 +12,17 @@ class TaxCalculation
         return new CollectionCalculation();
     }
 
-    public static function fromBasePrice(float $basePrice, float $taxRate): HasTaxWithRate
+    public static function fromBasePrice(float $basePrice, float $taxRate): ItemCalculation
     {
         return new ItemCalculation($basePrice, $taxRate);
     }
 
-    public static function fromTaxedPrice(float $taxedPrice, float $taxRate): HasTaxWithRate
+    public static function fromTaxedPrice(float $taxedPrice, float $taxRate): ItemCalculation
     {
         return new ItemCalculation($taxedPrice / (1 + $taxRate), $taxRate);
     }
 
-    public static function fromCollection($items): HasTax
+    public static function fromCollection($items): CollectionCalculation
     {
         if ($items instanceof \Traversable) {
             $items = iterator_to_array($items);
