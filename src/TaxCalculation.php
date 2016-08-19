@@ -2,27 +2,32 @@
 
 namespace Spatie\TaxCalculator;
 
-use Spatie\TaxCalculator\Results\CollectionCalculation;
-use Spatie\TaxCalculator\Results\ItemCalculation;
+use Spatie\TaxCalculator\Results\Calculation;
+use Spatie\TaxCalculator\Results\CalculationWithRate;
 
 class TaxCalculation
 {
-    public static function create(): HasTax
+    public static function fromItem(HasTax $item): Calculation
     {
-        return new CollectionCalculation();
+        return new Calculation($item->basePrice(), $item->taxPrice());
     }
 
-    public static function fromBasePrice(float $basePrice, float $taxRate): ItemCalculation
+    public static function fromItemWithRate(HasTaxWithRate $item): CalculationWithRate
     {
-        return new ItemCalculation($basePrice, $taxRate);
+        return new CalculationWithRate($item->basePrice(), $item->taxRate());
     }
 
-    public static function fromTaxedPrice(float $taxedPrice, float $taxRate): ItemCalculation
+    public static function fromBasePrice(float $basePrice, float $taxRate): CalculationWithRate
     {
-        return new ItemCalculation($taxedPrice / (1 + $taxRate), $taxRate);
+        return new CalculationWithRate($basePrice, $taxRate);
     }
 
-    public static function fromCollection($items): CollectionCalculation
+    public static function fromTaxedPrice(float $taxedPrice, float $taxRate): CalculationWithRate
+    {
+        return new CalculationWithRate($taxedPrice / (1 + $taxRate), $taxRate);
+    }
+
+    public static function fromCollection($items): Calculation
     {
         if ($items instanceof \Traversable) {
             $items = iterator_to_array($items);
@@ -32,6 +37,14 @@ class TaxCalculation
             throw new \InvalidArgumentException('`$items` must be an array or implement `\Traversable`');
         }
 
-        return new CollectionCalculation(...$items);
+        $basePrice = array_reduce($items, function (float $total, HasTax $item): float {
+            return $total + $item->basePrice();
+        }, 0);
+
+        $taxPrice = array_reduce($items, function (float $total, HasTax $item): float {
+            return $total + $item->taxPrice();
+        }, 0);
+
+        return new Calculation($basePrice, $taxPrice);
     }
 }

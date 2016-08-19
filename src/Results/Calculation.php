@@ -4,7 +4,7 @@ namespace Spatie\TaxCalculator\Results;
 
 use Spatie\TaxCalculator\HasTax;
 
-class CollectionCalculation implements HasTax
+class Calculation implements HasTax
 {
     /** @var float */
     protected $basePrice;
@@ -12,15 +12,10 @@ class CollectionCalculation implements HasTax
     /** @var float */
     protected $taxPrice;
 
-    public function __construct(HasTax ...$items)
+    public function __construct(float $basePrice, float $taxPrice)
     {
-        $this->basePrice = array_reduce($items, function (float $total, HasTax $item): float {
-            return $total + $item->basePrice();
-        }, 0);
-
-        $this->taxPrice = array_reduce($items, function (float $total, HasTax $item): float {
-            return $total + $item->taxPrice();
-        }, 0);
+        $this->basePrice = $basePrice;
+        $this->taxPrice = $taxPrice;
     }
 
     public function basePrice(): float
@@ -35,7 +30,7 @@ class CollectionCalculation implements HasTax
 
     public function taxedPrice(): float
     {
-        return $this->basePrice() + $this->taxPrice();
+        return $this->basePrice + $this->taxPrice;
     }
 
     public function addItem(HasTax $item, int $amount = 1): HasTax

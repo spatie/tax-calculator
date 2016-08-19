@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Spatie\TaxCalculator\HasTax;
 use Spatie\TaxCalculator\HasTaxWithRate;
-use Spatie\TaxCalculator\Results\ItemCalculation;
+use Spatie\TaxCalculator\Results\CalculationWithRate;
 use Spatie\TaxCalculator\TaxCalculation;
 
 class TaxCalculationTest extends PHPUnit_Framework_TestCase
@@ -39,8 +39,8 @@ class TaxCalculationTest extends PHPUnit_Framework_TestCase
     function it_can_create_a_calculation_from_a_collection_of_items_with_tax()
     {
         $calculation = TaxCalculation::fromCollection([
-            new ItemCalculation(10.00, 0.21),
-            new ItemCalculation(20.00, 0.06)
+            new CalculationWithRate(10.00, 0.21),
+            new CalculationWithRate(20.00, 0.06)
         ]);
 
         $this->assertInstanceOf(HasTax::class, $calculation);
@@ -55,16 +55,5 @@ class TaxCalculationTest extends PHPUnit_Framework_TestCase
         $this->expectException(InvalidArgumentException::class);
 
         TaxCalculation::fromCollection('foo');
-    }
-
-    /** @test */
-    function it_can_create_an_empty_calculation()
-    {
-        $calculation = TaxCalculation::create();
-
-        $this->assertInstanceOf(HasTax::class, $calculation);
-        $this->assertEquals(0.00, $calculation->basePrice());
-        $this->assertEquals(0.00, $calculation->taxPrice());
-        $this->assertEquals(0.00, $calculation->taxedPrice());
     }
 }

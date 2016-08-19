@@ -5,7 +5,7 @@ namespace Spatie\TaxCalculator\Results;
 use Spatie\TaxCalculator\HasTaxWithRate;
 use Spatie\TaxCalculator\Traits\HasTaxWithRate as HasTaxWithRateTrait;
 
-class ItemCalculation implements HasTaxWithRate
+class CalculationWithRate implements HasTaxWithRate
 {
     use HasTaxWithRateTrait;
 
