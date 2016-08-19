@@ -63,22 +63,22 @@ class Calculation implements HasTax
         return $calculation;
     }
 
-    public function add(float $amount)
+    public function add(float $basePrice, float $taxPrice)
     {
         $calculation = clone $this;
 
-        $calculation->basePrice = $this->basePrice + $amount;
-        $calculation->taxPrice = $this->taxPrice + $amount;
+        $calculation->basePrice = $this->basePrice + $basePrice;
+        $calculation->taxPrice = $this->taxPrice + $taxPrice;
 
         return $calculation;
     }
 
-    public function subtract(float $amount)
+    public function subtract(float $basePrice, float $taxPrice)
     {
         $calculation = clone $this;
 
-        $calculation->basePrice = $this->basePrice - $amount;
-        $calculation->taxPrice = $this->taxPrice - $amount;
+        $calculation->basePrice = $this->basePrice - $basePrice;
+        $calculation->taxPrice = $this->taxPrice - $taxPrice;
 
         return $calculation;
     }
