@@ -3,13 +3,14 @@
 namespace Spatie\TaxCalculator\Test;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Spatie\TaxCalculator\HasTax;
 use Spatie\TaxCalculator\HasTaxWithRate;
+use Spatie\TaxCalculator\Results\Calculation;
 use Spatie\TaxCalculator\Results\CalculationWithRate;
 use Spatie\TaxCalculator\TaxCalculation;
 
-class TaxCalculationTest extends PHPUnit_Framework_TestCase
+class TaxCalculationTest extends TestCase
 {
     /** @test */
     function it_can_create_a_calculation_from_a_base_price()
@@ -21,6 +22,43 @@ class TaxCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0.21, $calculation->taxRate());
         $this->assertEquals(2.10, $calculation->taxPrice());
         $this->assertEquals(12.10, $calculation->taxedPrice());
+    }
+
+    /** @test */
+    function it_can_create_a_calculation_from_item()
+    {
+        $calculation = TaxCalculation::fromItem(new Calculation(10.1, 21.1));
+
+        $this->assertInstanceOf(HasTax::class, $calculation);
+        $this->assertEquals(10.1, $calculation->basePrice());
+        $this->assertEquals(21.1, $calculation->taxPrice());
+        $this->assertEquals(31.20, $calculation->taxedPrice());
+    }
+
+    /** @test */
+    function it_can_create_a_calculation_from_item_with_rate()
+    {
+        $calculation = TaxCalculation::fromItemWithRate(new CalculationWithRate(10.1, 21.1));
+
+        $this->assertInstanceOf(HasTaxWithRate::class, $calculation);
+        $this->assertEquals(10.1, $calculation->basePrice());
+        $this->assertEquals(21.1, $calculation->taxRate());
+        $this->assertEquals(213.11, $calculation->taxPrice());
+        $this->assertEquals(223.21, $calculation->taxedPrice());
+    }
+
+    /** @test */
+    function it_can_create_a_calculation_from_collection_with_traversable()
+    {
+        $calculation = TaxCalculation::fromCollection(new \ArrayIterator([
+            new CalculationWithRate(10.00, 0.21),
+            new CalculationWithRate(20.00, 0.06)
+        ]));
+
+        $this->assertInstanceOf(Calculation::class, $calculation);
+        $this->assertEquals(30.0, $calculation->basePrice());
+        $this->assertEquals(3.3, $calculation->taxPrice());
+        $this->assertEquals(33.3, $calculation->taxedPrice());
     }
 
     /** @test */
