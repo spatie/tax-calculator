@@ -2,10 +2,10 @@
 
 namespace Spatie\TaxCalculator\Test\Results;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Spatie\TaxCalculator\Results\CalculationWithRate;
 
-class CalculationWithRateTest extends PHPUnit_Framework_TestCase
+class CalculationWithRateTest extends TestCase
 {
     /** @test */
     function it_can_get_the_base_price()
@@ -13,6 +13,38 @@ class CalculationWithRateTest extends PHPUnit_Framework_TestCase
         $taxedItem = new CalculationWithRate(10.00, 0.00);
 
         $this->assertEquals(10.00, $taxedItem->basePrice());
+    }
+
+    /** @test */
+    function it_can_get_the_multiply_price()
+    {
+        $taxedItem = new CalculationWithRate(10.00, 0.00);
+
+        $this->assertEquals(20.00, $taxedItem->multiply(2)->basePrice());
+    }
+
+    /** @test */
+    function it_can_get_the_divide_price()
+    {
+        $taxedItem = new CalculationWithRate(10.00, 0.00);
+
+        $this->assertEquals(5.00, $taxedItem->divide(2)->basePrice());
+    }
+
+    /** @test */
+    function it_can_get_the_add_price()
+    {
+        $taxedItem = new CalculationWithRate(10.00, 0.00);
+
+        $this->assertEquals(12.00, $taxedItem->add(2)->basePrice());
+    }
+
+    /** @test */
+    function it_can_get_the_subtract_price()
+    {
+        $taxedItem = new CalculationWithRate(10.00, 0.00);
+
+        $this->assertEquals(8.00, $taxedItem->subtract(2)->basePrice());
     }
 
     /** @test */
