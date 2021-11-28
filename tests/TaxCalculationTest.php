@@ -13,7 +13,7 @@ use Spatie\TaxCalculator\TaxCalculation;
 class TaxCalculationTest extends TestCase
 {
     /** @test */
-    function it_can_create_a_calculation_from_a_base_price()
+    public function it_can_create_a_calculation_from_a_base_price()
     {
         $calculation = TaxCalculation::fromBasePrice(10.00, 0.21);
 
@@ -25,7 +25,7 @@ class TaxCalculationTest extends TestCase
     }
 
     /** @test */
-    function it_can_create_a_calculation_from_item()
+    public function it_can_create_a_calculation_from_item()
     {
         $calculation = TaxCalculation::fromItem(new Calculation(10.1, 21.1));
 
@@ -36,7 +36,7 @@ class TaxCalculationTest extends TestCase
     }
 
     /** @test */
-    function it_can_create_a_calculation_from_item_with_rate()
+    public function it_can_create_a_calculation_from_item_with_rate()
     {
         $calculation = TaxCalculation::fromItemWithRate(new CalculationWithRate(10.1, 21.1));
 
@@ -48,11 +48,11 @@ class TaxCalculationTest extends TestCase
     }
 
     /** @test */
-    function it_can_create_a_calculation_from_collection_with_traversable()
+    public function it_can_create_a_calculation_from_collection_with_traversable()
     {
         $calculation = TaxCalculation::fromCollection(new \ArrayIterator([
             new CalculationWithRate(10.00, 0.21),
-            new CalculationWithRate(20.00, 0.06)
+            new CalculationWithRate(20.00, 0.06),
         ]));
 
         $this->assertInstanceOf(Calculation::class, $calculation);
@@ -62,7 +62,7 @@ class TaxCalculationTest extends TestCase
     }
 
     /** @test */
-    function it_can_create_a_calculation_from_a_taxed_price()
+    public function it_can_create_a_calculation_from_a_taxed_price()
     {
         $calculation = TaxCalculation::fromTaxedPrice(12.10, 0.21);
 
@@ -74,11 +74,11 @@ class TaxCalculationTest extends TestCase
     }
 
     /** @test */
-    function it_can_create_a_calculation_from_a_collection_of_items_with_tax()
+    public function it_can_create_a_calculation_from_a_collection_of_items_with_tax()
     {
         $calculation = TaxCalculation::fromCollection([
             new CalculationWithRate(10.00, 0.21),
-            new CalculationWithRate(20.00, 0.06)
+            new CalculationWithRate(20.00, 0.06),
         ]);
 
         $this->assertInstanceOf(HasTax::class, $calculation);
@@ -88,7 +88,7 @@ class TaxCalculationTest extends TestCase
     }
 
     /** @test */
-    function it_only_accepts_arrays_and_traversables_for_collection_calculations()
+    public function it_only_accepts_arrays_and_traversables_for_collection_calculations()
     {
         $this->expectException(InvalidArgumentException::class);
 

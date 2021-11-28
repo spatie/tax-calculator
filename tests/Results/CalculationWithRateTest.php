@@ -8,7 +8,7 @@ use Spatie\TaxCalculator\Results\CalculationWithRate;
 class CalculationWithRateTest extends TestCase
 {
     /** @test */
-    function it_can_get_the_base_price()
+    public function it_can_get_the_base_price()
     {
         $taxedItem = new CalculationWithRate(10.00, 0.00);
 
@@ -16,7 +16,7 @@ class CalculationWithRateTest extends TestCase
     }
 
     /** @test */
-    function it_can_get_the_multiply_price()
+    public function it_can_get_the_multiply_price()
     {
         $taxedItem = new CalculationWithRate(10.00, 0.00);
 
@@ -24,7 +24,7 @@ class CalculationWithRateTest extends TestCase
     }
 
     /** @test */
-    function it_can_get_the_divide_price()
+    public function it_can_get_the_divide_price()
     {
         $taxedItem = new CalculationWithRate(10.00, 0.00);
 
@@ -32,7 +32,7 @@ class CalculationWithRateTest extends TestCase
     }
 
     /** @test */
-    function it_can_get_the_add_price()
+    public function it_can_get_the_add_price()
     {
         $taxedItem = new CalculationWithRate(10.00, 0.00);
 
@@ -40,7 +40,7 @@ class CalculationWithRateTest extends TestCase
     }
 
     /** @test */
-    function it_can_get_the_subtract_price()
+    public function it_can_get_the_subtract_price()
     {
         $taxedItem = new CalculationWithRate(10.00, 0.00);
 
@@ -48,7 +48,7 @@ class CalculationWithRateTest extends TestCase
     }
 
     /** @test */
-    function it_can_get_the_tax_rate()
+    public function it_can_get_the_tax_rate()
     {
         $taxedItem = new CalculationWithRate(10.00, 0.21);
 
@@ -56,7 +56,7 @@ class CalculationWithRateTest extends TestCase
     }
 
     /** @test */
-    function it_can_calculate_the_tax_price()
+    public function it_can_calculate_the_tax_price()
     {
         $taxedItem = new CalculationWithRate(10.00, 0.21);
 
@@ -64,7 +64,7 @@ class CalculationWithRateTest extends TestCase
     }
 
     /** @test */
-    function it_can_calculate_the_taxed_price()
+    public function it_can_calculate_the_taxed_price()
     {
         $taxedItem = new CalculationWithRate(10.00, 0.21);
 

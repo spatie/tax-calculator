@@ -33,7 +33,7 @@ class TaxCalculation
             $items = iterator_to_array($items);
         }
 
-        if (!is_array($items)) {
+        if (! is_array($items)) {
             throw new \InvalidArgumentException('`$items` must be an array or implement `\Traversable`');
         }
 
