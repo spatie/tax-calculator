@@ -6,16 +6,8 @@ use Spatie\TaxCalculator\HasTax;
 
 class Calculation implements HasTax
 {
-    /** @var float */
-    protected $basePrice;
-
-    /** @var float */
-    protected $taxPrice;
-
-    public function __construct(float $basePrice, float $taxPrice)
+    public function __construct(protected float $basePrice, protected float $taxPrice)
     {
-        $this->basePrice = $basePrice;
-        $this->taxPrice = $taxPrice;
     }
 
     public function basePrice(): float
@@ -43,7 +35,7 @@ class Calculation implements HasTax
         return $calculation;
     }
 
-    public function multiply(float $factor)
+    public function multiply(float $factor): static
     {
         $calculation = clone $this;
 
@@ -53,7 +45,7 @@ class Calculation implements HasTax
         return $calculation;
     }
 
-    public function divide(float $dividor)
+    public function divide(float $dividor): static
     {
         $calculation = clone $this;
 
@@ -63,7 +55,7 @@ class Calculation implements HasTax
         return $calculation;
     }
 
-    public function add(float $basePrice, float $taxPrice)
+    public function add(float $basePrice, float $taxPrice): static
     {
         $calculation = clone $this;
 
@@ -73,7 +65,7 @@ class Calculation implements HasTax
         return $calculation;
     }
 
-    public function subtract(float $basePrice, float $taxPrice)
+    public function subtract(float $basePrice, float $taxPrice): static
     {
         $calculation = clone $this;
 

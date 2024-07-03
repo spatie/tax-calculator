@@ -27,7 +27,7 @@ class TaxCalculation
         return new CalculationWithRate($taxedPrice / (1 + $taxRate), $taxRate);
     }
 
-    public static function fromCollection($items): Calculation
+    public static function fromCollection(mixed $items): Calculation
     {
         if ($items instanceof \Traversable) {
             $items = iterator_to_array($items);
