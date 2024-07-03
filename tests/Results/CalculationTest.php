@@ -9,7 +9,7 @@ use Spatie\TaxCalculator\Results\CalculationWithRate;
 class CalculationTest extends TestCase
 {
     /** @test */
-    public function items_can_be_added_to_an_existing_instance()
+    public function items_can_be_added_to_an_existing_instance(): void
     {
         $taxedItemCalculation = new Calculation(10.00, 2.10);
         $taxedItemCalculation = $taxedItemCalculation->addItem(new CalculationWithRate(20.00, 0.06));
@@ -18,7 +18,7 @@ class CalculationTest extends TestCase
     }
 
     /** @test */
-    public function items_can_be_added_to_an_existing_instance_with_an_amount()
+    public function items_can_be_added_to_an_existing_instance_with_an_amount(): void
     {
         $taxedItemCalculation = new Calculation(10.00, 2.10);
         $taxedItemCalculation = $taxedItemCalculation->addItem(new CalculationWithRate(20.00, 0.06), 2);
@@ -27,7 +27,7 @@ class CalculationTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_multiply_price()
+    public function it_can_get_multiply_price(): void
     {
         $taxedItemCalculation = new Calculation(10.00, 2.10);
 
@@ -35,7 +35,7 @@ class CalculationTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_divide_price()
+    public function it_can_get_divide_price(): void
     {
         $taxedItemCalculation = new Calculation(10.00, 2.10);
 
@@ -43,7 +43,7 @@ class CalculationTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_add_price()
+    public function it_can_get_add_price(): void
     {
         $taxedItemCalculation = new Calculation(10.00, 2.10);
 
@@ -51,7 +51,7 @@ class CalculationTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_subtract_price()
+    public function it_can_get_subtract_price(): void
     {
         $taxedItemCalculation = new Calculation(10.00, 2.10);
 

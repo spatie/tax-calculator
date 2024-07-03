@@ -13,7 +13,7 @@ use Rector\TypeDeclaration\Rector\ClassMethod\ReturnNeverTypeRector;
 use Rector\TypeDeclaration\Rector\Closure\AddClosureVoidReturnTypeWhereNoReturnRector;
 
 return RectorConfig::configure()
-    ->withPaths(['src'])
+    ->withPaths(['src', 'tests'])
     ->withPhpSets(php82: true)
     ->withPreparedSets(typeDeclarations: true)
     ->withSkip([
