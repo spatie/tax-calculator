@@ -1,12 +1,8 @@
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
 # A set of interfaces and methods to clean up your application's tax calculations
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/tax-calculator.svg?style=flat-square)](https://packagist.org/packages/spatie/tax-calculator)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/spatie/tax-calculator/run-tests?label=tests&style=flat-square)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/xxxxxxxxx.svg?style=flat-square)](https://insight.sensiolabs.com/projects/xxxxxxxxx)
+[![Tests](https://github.com/spatie/tax-calculator/actions/workflows/run-tests.yml/badge.svg)](https://github.com/spatie/tax-calculator/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/tax-calculator.svg?style=flat-square)](https://packagist.org/packages/spatie/tax-calculator)
 
 A set of interfaces and methods to clean up your application's tax calculations. The `TaxCalculation` class allows you to do calculations with plain numbers and objects that implement the `HasTax` interface on the fly.
