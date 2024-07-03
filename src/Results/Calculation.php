@@ -30,7 +30,7 @@ class Calculation implements HasTax
 
     public function taxedPrice(): float
     {
-        return $this->basePrice + $this->taxPrice;
+        return number_format(($this->basePrice + $this->taxPrice), 2);
     }
 
     public function addItem(HasTax $item, int $amount = 1): HasTax
