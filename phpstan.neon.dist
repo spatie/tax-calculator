@@ -1,0 +1,12 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 5
+    paths:
+        - src
+        - tests
+    tmpDir: build/phpstan
+
+    ignoreErrors:
+        - '#Unsafe usage of new static\(\)#'
