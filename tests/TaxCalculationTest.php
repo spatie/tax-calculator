@@ -18,10 +18,10 @@ class TaxCalculationTest extends TestCase
         $calculation = TaxCalculation::fromBasePrice(10.00, 0.21);
 
         $this->assertInstanceOf(HasTaxWithRate::class, $calculation);
-        $this->assertEquals(10.00, $calculation->basePrice());
-        $this->assertEquals(0.21, $calculation->taxRate());
-        $this->assertEquals(2.10, $calculation->taxPrice());
-        $this->assertEquals(12.10, $calculation->taxedPrice());
+        $this->assertSame(10.00, $calculation->basePrice());
+        $this->assertSame(0.21, $calculation->taxRate());
+        $this->assertSame(2.10, $calculation->taxPrice());
+        $this->assertSame(12.10, $calculation->taxedPrice());
     }
 
     /** @test */
@@ -30,9 +30,9 @@ class TaxCalculationTest extends TestCase
         $calculation = TaxCalculation::fromItem(new Calculation(10.1, 21.1));
 
         $this->assertInstanceOf(HasTax::class, $calculation);
-        $this->assertEquals(10.1, $calculation->basePrice());
-        $this->assertEquals(21.1, $calculation->taxPrice());
-        $this->assertEquals(31.20, $calculation->taxedPrice());
+        $this->assertSame(10.1, $calculation->basePrice());
+        $this->assertSame(21.1, $calculation->taxPrice());
+        $this->assertSame(31.20, $calculation->taxedPrice());
     }
 
     /** @test */
@@ -41,10 +41,10 @@ class TaxCalculationTest extends TestCase
         $calculation = TaxCalculation::fromItemWithRate(new CalculationWithRate(10.1, 21.1));
 
         $this->assertInstanceOf(HasTaxWithRate::class, $calculation);
-        $this->assertEquals(10.1, $calculation->basePrice());
-        $this->assertEquals(21.1, $calculation->taxRate());
-        $this->assertEquals(213.11, $calculation->taxPrice());
-        $this->assertEquals(223.21, $calculation->taxedPrice());
+        $this->assertSame(10.1, $calculation->basePrice());
+        $this->assertSame(21.1, $calculation->taxRate());
+        $this->assertSame(213.11, $calculation->taxPrice());
+        $this->assertSame(223.21, $calculation->taxedPrice());
     }
 
     /** @test */
@@ -56,9 +56,9 @@ class TaxCalculationTest extends TestCase
         ]));
 
         $this->assertInstanceOf(Calculation::class, $calculation);
-        $this->assertEquals(30.0, $calculation->basePrice());
-        $this->assertEquals(3.3, $calculation->taxPrice());
-        $this->assertEquals(33.3, $calculation->taxedPrice());
+        $this->assertSame(30.0, $calculation->basePrice());
+        $this->assertSame(3.3, $calculation->taxPrice());
+        $this->assertSame(33.3, $calculation->taxedPrice());
     }
 
     /** @test */
@@ -67,10 +67,10 @@ class TaxCalculationTest extends TestCase
         $calculation = TaxCalculation::fromTaxedPrice(12.10, 0.21);
 
         $this->assertInstanceOf(HasTaxWithRate::class, $calculation);
-        $this->assertEquals(10.00, $calculation->basePrice());
-        $this->assertEquals(0.21, $calculation->taxRate());
-        $this->assertEquals(2.10, $calculation->taxPrice());
-        $this->assertEquals(12.10, $calculation->taxedPrice());
+        $this->assertSame(10.00, $calculation->basePrice());
+        $this->assertSame(0.21, $calculation->taxRate());
+        $this->assertSame(2.10, $calculation->taxPrice());
+        $this->assertSame(12.10, $calculation->taxedPrice());
     }
 
     /** @test */
@@ -82,9 +82,9 @@ class TaxCalculationTest extends TestCase
         ]);
 
         $this->assertInstanceOf(HasTax::class, $calculation);
-        $this->assertEquals(30.00, $calculation->basePrice());
-        $this->assertEquals(3.30, $calculation->taxPrice());
-        $this->assertEquals(33.30, $calculation->taxedPrice());
+        $this->assertSame(30.00, $calculation->basePrice());
+        $this->assertSame(3.30, $calculation->taxPrice());
+        $this->assertSame(33.30, $calculation->taxedPrice());
     }
 
     /** @test */
