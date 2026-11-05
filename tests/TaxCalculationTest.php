@@ -12,8 +12,7 @@ use Spatie\TaxCalculator\TaxCalculation;
 
 class TaxCalculationTest extends TestCase
 {
-    /** @test */
-    public function it_can_create_a_calculation_from_a_base_price()
+    public function test_it_can_create_a_calculation_from_a_base_price()
     {
         $calculation = TaxCalculation::fromBasePrice(10.00, 0.21);
 
@@ -24,8 +23,7 @@ class TaxCalculationTest extends TestCase
         $this->assertSame(12.10, $calculation->taxedPrice());
     }
 
-    /** @test */
-    public function it_can_create_a_calculation_from_item()
+    public function test_it_can_create_a_calculation_from_item()
     {
         $calculation = TaxCalculation::fromItem(new Calculation(10.1, 21.1));
 
@@ -35,8 +33,7 @@ class TaxCalculationTest extends TestCase
         $this->assertSame(31.20, $calculation->taxedPrice());
     }
 
-    /** @test */
-    public function it_can_create_a_calculation_from_item_with_rate()
+    public function test_it_can_create_a_calculation_from_item_with_rate()
     {
         $calculation = TaxCalculation::fromItemWithRate(new CalculationWithRate(10.1, 21.1));
 
@@ -47,8 +44,7 @@ class TaxCalculationTest extends TestCase
         $this->assertSame(223.21, $calculation->taxedPrice());
     }
 
-    /** @test */
-    public function it_can_create_a_calculation_from_collection_with_traversable()
+    public function test_it_can_create_a_calculation_from_collection_with_traversable()
     {
         $calculation = TaxCalculation::fromCollection(new \ArrayIterator([
             new CalculationWithRate(10.00, 0.21),
@@ -61,8 +57,7 @@ class TaxCalculationTest extends TestCase
         $this->assertSame(33.3, $calculation->taxedPrice());
     }
 
-    /** @test */
-    public function it_can_create_a_calculation_from_a_taxed_price()
+    public function test_it_can_create_a_calculation_from_a_taxed_price()
     {
         $calculation = TaxCalculation::fromTaxedPrice(12.10, 0.21);
 
@@ -73,8 +68,7 @@ class TaxCalculationTest extends TestCase
         $this->assertSame(12.10, $calculation->taxedPrice());
     }
 
-    /** @test */
-    public function it_can_create_a_calculation_from_a_collection_of_items_with_tax()
+    public function test_it_can_create_a_calculation_from_a_collection_of_items_with_tax()
     {
         $calculation = TaxCalculation::fromCollection([
             new CalculationWithRate(10.00, 0.21),
@@ -87,8 +81,7 @@ class TaxCalculationTest extends TestCase
         $this->assertSame(33.30, $calculation->taxedPrice());
     }
 
-    /** @test */
-    public function it_only_accepts_arrays_and_traversables_for_collection_calculations()
+    public function test_it_only_accepts_arrays_and_traversables_for_collection_calculations()
     {
         $this->expectException(InvalidArgumentException::class);
 
