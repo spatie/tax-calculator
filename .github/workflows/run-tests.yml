@@ -17,8 +17,15 @@ jobs:
             fail-fast: true
             matrix:
                 os: [ ubuntu-latest, windows-latest ]
-                php: [8.3, 8.2, 8.1, 8.0, 7.4, 7.3 ]
+                php: ['8.6', '8.5', '8.4', '8.3', '8.2', '8.1', '8.0', '7.4', '7.3']
                 stability: [ prefer-lowest, prefer-stable ]
+                include:
+                    - php: '8.4'
+                      phpunit: '^13.4.6'
+                    - php: '8.5'
+                      phpunit: '^13.4.6'
+                    - php: '8.6'
+                      phpunit: '^13.4.6'
 
         name: P${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -31,7 +38,7 @@ jobs:
               with:
                   php-version: ${{ matrix.php }}
                   extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-                  coverage: none
+                  coverage: pcov
 
             - name: Setup problem matchers
               run: |
@@ -39,10 +46,19 @@ jobs:
                   echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
             - name: Install dependencies
-              run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+              shell: bash
+              run: |
+                  if [ -n "${{ matrix.phpunit }}" ]; then
+                      composer require --dev 'phpunit/phpunit:${{ matrix.phpunit }}' --no-update --no-interaction
+                  fi
+                  composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
             - name: List Installed Dependencies
               run: composer show -D
+
+            - name: Migrate PHPUnit configuration
+              if: matrix.phpunit != ''
+              run: vendor/bin/phpunit --migrate-configuration
 
             - name: Execute tests
               run: vendor/bin/phpunit
